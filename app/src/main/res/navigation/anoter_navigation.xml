@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_dashboard"
+    app:startDestination="@id/dashboard_root">
+    <fragment
+        android:id="@+id/dashboard_root"
+        android:name="com.laxy.navbugdemo.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_subboard"
+            app:destination="@id/sub_dashboard" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sub_dashboard"
+        android:name="com.laxy.navbugdemo.ui.dashboard.SubDashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_subdashboard_to_subhome"
+            app:destination="@id/sub_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sub_home"
+        android:name="com.laxy.navbugdemo.ui.home.SubHomeFragment"
+        android:label="subHome"
+        tools:layout="@layout/fragment_sub_home">
+        <argument
+            android:name="from"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+</navigation>
