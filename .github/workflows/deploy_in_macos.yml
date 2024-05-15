@@ -1,0 +1,32 @@
+name: Build in macos
+
+on:
+  push:
+    tags:
+      - macos*
+
+jobs:
+  build:
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read  # This is required for actions/checkout
+
+    name: Building and distributing app
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: set up JAVA 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Build Release APK
+        run: |
+          ./gradlew :app:assemble
+          cat $(pwd)/app/build/generated/source/navigation-args/debug/com/laxy/navbugdemo/ui/home/SubHomeFragmentDirections.kt
